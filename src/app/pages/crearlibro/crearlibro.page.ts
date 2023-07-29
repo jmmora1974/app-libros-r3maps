@@ -129,6 +129,9 @@ export class CrearlibroPage implements OnInit {
         valoracion: this.formLibro.get('valoracion')!.value,
         precio:this.formLibro.get('precio')!.value,
         propietario: this.authService.getUserId(),
+        ciudad: (await this.userService.getUser()).ciudad,
+        displayPropietario: (await this.userService.getUser()).displayname,
+        ubicacion: (await this.userService.getUser()).ubicacion,
         imageUrl: this.nuevoLibro.imageUrl
       };
       console.log(this.nuevoLibro)

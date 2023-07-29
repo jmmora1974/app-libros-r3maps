@@ -13,8 +13,11 @@ export const environment = {
     authDomain: 'app-libros-986e7.firebaseapp.com',
     messagingSenderId: '71001102642',
   },
-  production: false
+  production: false,
+  googleApiKey: "AIzaSyBZDTQ4N0oN9lzp4A73V6cMj8qTU0Wzhjs",
+  
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

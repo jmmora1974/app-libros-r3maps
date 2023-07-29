@@ -1,3 +1,5 @@
+import { LatLng } from "@capacitor/google-maps/dist/typings/definitions";
+
 export interface ILibro {
     id?:string;
     titulo: string,
@@ -6,9 +8,14 @@ export interface ILibro {
     valoracion: number,
     precio: number,
     propietario:string,
+    displayPropietario?:string,
+    ciudad?:string,
+    ubicacion?:LatLng,
     comprador?:string,
     imageUrl?:string
-    galeriaFotos?: IUserPhoto[]
+    galeriaFotos?: IUserPhoto[],
+
+
 
 }
 export interface IUserPhoto {

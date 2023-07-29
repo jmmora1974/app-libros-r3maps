@@ -54,6 +54,16 @@ export class UsuarisService {
     return updateDoc(userDocRef[0].ref, {
       nom: user.nom,
       cognom: user.cognom,  
+      displayname: user.displayname,
+      phone: user.phone,
+      calle: user.calle,
+      numero: user.numero,
+      piso: user.piso,
+      puerta: user.puerta,
+      ciudad: user.ciudad,
+      pais: user.pais
+      
+      
     });
   }
   

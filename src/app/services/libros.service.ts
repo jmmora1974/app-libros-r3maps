@@ -102,7 +102,6 @@ export class LibrosService {
       const q = query(collection(this.firestore, 'transacciones'), where('vendedor', '==', userProp));
       const querySnapshot = await getDocs(q);
       let librosV = querySnapshot.docs.map(doc => doc.data() as ILibro);
-      console.log(librosV);
       this.librosVendidos.next(librosV)
       return librosV;
     }

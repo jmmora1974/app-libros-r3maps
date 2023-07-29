@@ -15,7 +15,7 @@
         <ion-text color="dark">Sign Up</ion-text>
       </h1>
       <p class="animate__animated animate__fadeInUp">
-        <ion-text color="medium">Create a free account.</ion-text>
+        <ion-text color="medium">Crea tu cuenta.</ion-text>
       </p>
     </div>
 
@@ -24,9 +24,9 @@
       <ion-item color="light" class="animate__animated animate__fadeInUp">
         <ion-label position="floating">
           <ion-icon name="person-outline" item-start></ion-icon>
-          Usename
+          Display Name
         </ion-label>
-        <ion-input color="secondary" type="text" autocomplete="off" formControlName="name" placeholder="Your name"></ion-input>
+        <ion-input color="secondary" type="text" autocomplete="off" formControlName="displayname" placeholder="Tu nombre para mostrar"></ion-input>
       </ion-item>
       <ion-item color="light" class="animate__animated animate__fadeInUp">
         <ion-label position="floating">
@@ -35,7 +35,7 @@
         </ion-label>
         <ion-input color="secondary" type="email" autocomplete="off" formControlName="email" placeholder="Your email"></ion-input>
       </ion-item>
-
+      
       <ion-item color="light" class="animate__animated animate__fadeInUp">
         <ion-label position="floating">
           <ion-icon name="lock-closed-outline"></ion-icon>
@@ -52,6 +52,78 @@
         <ion-input color="secondary" formControlName="password_repeat" type="password" placeholder="Password repeat"></ion-input>
       </ion-item> 
 
+      <ion-item color="light" class="animate__animated animate__fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="person-outline" item-start></ion-icon>
+          Nombre
+        </ion-label>
+        <ion-input color="secondary" type="text" autocomplete="off" formControlName="nom" placeholder="Tu nombre"></ion-input>
+      </ion-item>
+
+      <ion-item color="light" class="animate__animated animate__fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="person-outline" item-start></ion-icon>
+          Apellidos
+        </ion-label>
+        <ion-input color="secondary" type="text" autocomplete="off" formControlName="cognom" placeholder="Apellidos"></ion-input>
+      </ion-item>
+      <ion-item color="light" class="animate__animated animate__fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="person-outline" item-start></ion-icon>
+          Telefono
+        </ion-label>
+        <ion-input color="secondary" type="text" autocomplete="off" formControlName="phone" placeholder="Telefono"></ion-input>
+      </ion-item>  
+      <ion-item color="light" class="animate__animated animate__fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="person-outline" item-start></ion-icon>
+          Calle
+        </ion-label>
+        <ion-input color="secondary" type="text" autocomplete="off" formControlName="calle" placeholder="Calle/avenida/..."></ion-input>
+      </ion-item>
+       
+    <ion-item> 
+        <ion-item color="light" class="animate__animated animate__fadeInUp" style="width: 150px;">
+          <ion-label position="floating">
+            <ion-icon name="person-outline" item-start></ion-icon>
+            Numero
+          </ion-label>
+          <ion-input color="secondary" type="number" autocomplete="off" formControlName="numero" placeholder="Numero"></ion-input>
+        </ion-item>
+
+        <ion-item color="light" class="animate__animated animate__fadeInUp" style="width: 150px;">
+          <ion-label position="floating">
+            <ion-icon name="person-outline" item-start></ion-icon>
+            Piso
+          </ion-label>
+          <ion-input color="secondary" type="number" autocomplete="off" formControlName="piso" placeholder="Piso"></ion-input>
+        </ion-item>
+        
+        <ion-item color="light" class="animate__animated animate__fadeInUp" style="width: 150px;">
+          <ion-label position="floating">
+            <ion-icon name="person-outline" item-start></ion-icon>
+            Puerta
+          </ion-label>
+          <ion-input color="secondary" type="text" autocomplete="off" formControlName="puerta" placeholder="Puerta"></ion-input>
+        </ion-item>  
+      </ion-item> 
+       
+      <ion-item color="light" class="animate__animated animate__fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="person-outline" item-start></ion-icon>
+          Ciudad
+        </ion-label>
+        <ion-input color="secondary" type="text" autocomplete="off" formControlName="ciudad" placeholder="Ciudad"></ion-input>
+      </ion-item>
+
+      <ion-item color="light" class="animate__animated animate__fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="person-outline" item-start></ion-icon>
+          Pais
+        </ion-label>
+        <ion-input color="secondary" type="text" autocomplete="off" formControlName="pais" placeholder="Pais"></ion-input>
+      </ion-item>  
+  
       <ion-button class="ion-margin-top" type="submit" expand="block" size="large" color="secondary">
         Sign up free
       </ion-button>

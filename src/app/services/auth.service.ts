@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Auth, User, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { IEmailPwd, IUser } from '../models/iuser';
 import { BehaviorSubject } from 'rxjs';
+import { UsuarisService } from './usuaris.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
 	async register({ email, password }: IEmailPwd) {
 		try {
 			const user = await createUserWithEmailAndPassword(this.auth, email, password);
+			
 			return user;
 		} catch (e) {
 			return null;

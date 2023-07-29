@@ -20,4 +20,17 @@ ion-avatar {
     align-items: center;
     font-weight: 500;
   }
-  
+  capacitor-google-map {
+    display: inline-block;
+    width: 95%;
+    height: 250px;
+    justify-content: center;
+  }
+
+  #my-map {
+    display: inline-block;
+    width: 95%;
+    height: 350px;
+    justify-content: center;
+  }
+

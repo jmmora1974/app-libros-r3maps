@@ -5,11 +5,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">home</ion-title>
     </ion-toolbar>
   </ion-header>
+  <app-mapa>map</app-mapa>
   <ion-list>
     <ion-list-header>
       <ion-title>Listado  de libros</ion-title>
@@ -24,11 +26,13 @@
       
         <ion-card-content>
           {{libro.valoracion}}  {{libro.descripcion}}
-          <ion-label> Precio:  {{libro.precio}} <ion-icon name="cash">Comprar</ion-icon></ion-label>  
+          <ion-label> Precio:  {{libro.precio|currency}} </ion-label>  
+          <ion-label> Vendedor:  {{libro.displayPropietario}} </ion-label>  
           <ion-button color="danger" (click)="comprarLibro(libro)" >Buy</ion-button>
         </ion-card-content>
       </ion-card>
     
     </ion-item>
   </ion-list>
+  
 </ion-content>

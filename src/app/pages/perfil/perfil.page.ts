@@ -12,8 +12,12 @@ import { UsuarisService } from 'src/app/services/usuaris.service';
 
 import { ModalLibroPage } from './modal-libro/modal-libro.page';
 import { ILibro } from 'src/app/models/ilibro';
-import { error } from 'console';
-
+import { GoogleMap } from '@capacitor/google-maps';
+import { environment } from 'src/environments/environment';
+import { Geolocation } from '@capacitor/geolocation';
+import { LatLng } from '@capacitor/google-maps/dist/typings/definitions';
+import { GooglemapsService } from '../../services/googlemaps.service';
+import {MapaPageModule} from './../mapa/mapa.module'
 
 @Component({
   selector: 'app-perfil',
@@ -31,6 +35,8 @@ export class PerfilPage implements OnInit {
   librosVendidos$=this.librosService.librosVendidos$;
   librosComprados: ILibro[]=[];
   message='Los cambios del libro son:'
+  
+
   constructor( 
     private authService: AuthService,
     private loadingController: LoadingController,
@@ -41,11 +47,12 @@ export class PerfilPage implements OnInit {
     public userService: UsuarisService,
     public librosService:LibrosService,
     private fb: FormBuilder,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private googlemapsService:GooglemapsService
   ) { 
     this.photoService.getUserProfile().subscribe((data) => {
       this.profile = data;
-      
+      this.googlemapsService.iniciaMapa();
     });
    
 
@@ -58,8 +65,17 @@ export class PerfilPage implements OnInit {
     }).then(()=>
       this.librosService.getLibrobyPropietario(this.userLogat.id!).then ((lib)=>{
            this.formperfil = this.fb.group ({
+            email: [this.userLogat.email, [Validators.required,Validators.email]],
+            displayname: [this.userLogat!.displayname, [Validators.required]],
             nom: [this.userLogat!.nom, [Validators.required]],
             cognom: [this.userLogat!.cognom,[Validators.required]],
+            phone: [this.userLogat!.phone],
+            calle: [this.userLogat!.calle, Validators.compose([ Validators.required])],
+            numero:  [this.userLogat!.numero],
+            piso:  [this.userLogat!.piso],
+            puerta: [this.userLogat!.puerta],
+            ciudad: [this.userLogat!.ciudad, Validators.compose([ Validators.required])],
+            pais: [this.userLogat!.pais, Validators.compose([ Validators.required])],
             imageUrl:[this.userLogat!.imageUrl],
             tokenPush: [this.userLogat!.tokenPush]
           }); 
@@ -76,21 +92,42 @@ export class PerfilPage implements OnInit {
     );
    
   }
-  ionViewWillEnter() {
-    this.init();
+   ionViewWillEnter() {
+    
+
+    this.init().then(async ()=>{
+    // await this.googlemapsService.iniciaMapa('mapaPerfil1');
+    });
+    setTimeout(()=>{
+
+      // this.googlemapsService.iniciaMapa('mapaPerfil2');
+     },5000)
+    
+
   }
 
-  init() {
+ async init() {
     this.user!=this.authService.userLogged();
-    this.userService.getUser().then((user: IUser) => {
+    await this.userService.getUser().then((user: IUser) => {
       this.userLogat = user;
       console.log(this.user);
       console.log(user);
-      this.formperfil = this.fb.group ({
+      this.formperfil =  this.fb.group ({
+        tokenPush: [this.userLogat!.tokenPush],
+        email: [this.userLogat.email, [Validators.required,Validators.email]],
+        displayname: [this.userLogat!.displayname, [Validators.required]],
         nom: [this.userLogat!.nom, [Validators.required]],
         cognom: [this.userLogat!.cognom,[Validators.required]],
+        phone: [this.userLogat!.phone],
+        calle: [this.userLogat!.calle, Validators.compose([ Validators.required])],
+        numero:  [this.userLogat!.numero],
+        piso:  [this.userLogat!.piso],
+        puerta: [this.userLogat!.puerta],
+        ciudad: [this.userLogat!.ciudad, Validators.compose([ Validators.required])],
+        pais: [this.userLogat!.pais, Validators.compose([ Validators.required])],
         imageUrl:[this.userLogat!.imageUrl],
-        tokenPush: [this.userLogat!.tokenPush]
+       
+        
   
       });
 
@@ -101,15 +138,24 @@ export class PerfilPage implements OnInit {
 
   //Actualiza los datos del perfil y la foto del avatar.
   actualizaPerfil(){
-    console.log(this.formperfil.value)
+    
     const userP:IUser ={
+      email:this.formperfil.get('email')?.value,
+      displayname: this.formperfil.get('displayname')?.value,
       nom: this.formperfil.get('nom')?.value,
       cognom: this.formperfil.get('cognom')?.value,
+      phone:this.formperfil.get('phone')?.value,
+      calle: this.formperfil.get('calle')?.value,
+      numero: this.formperfil.get('numero')?.value,
+      piso: this.formperfil.get('piso')?.value,
+      puerta: this.formperfil.get('puerta')?.value,
+      ciudad: this.formperfil.get('ciudad')?.value,
+      pais: this.formperfil.get('pais')?.value,
       imageUrl:this.formperfil.get('imageUrl')?.value,
       tokenPush:this.formperfil.get('tokenPush')?.value,
     }
-
-   this.userService.updateUser(userP)
+    console.log('Usep :',userP)
+ 
     
   }
   //Abre una ventana modal con el formulario de libro para realizar modificaciones o cambio de foto.
@@ -206,5 +252,7 @@ export class PerfilPage implements OnInit {
       this.router.navigateByUrl ('/',{replaceUrl: true});
     
   }
+
+ 
 
 }

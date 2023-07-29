@@ -62,9 +62,10 @@ ionic generate service services/libros
 ionic generate interface models/IUser
 ionic generate interface models/ILibro
 
-
 npm i @capacitor/camera
 npm i @ionic/pwa-elements
+
+--comienza r3maps 28/07
 
 npm install @capacitor/google-maps
 npx cap sync
