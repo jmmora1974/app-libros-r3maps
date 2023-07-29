@@ -51,7 +51,7 @@ export class MapaComponent  implements OnInit {
           const newMap = await GoogleMap.create({
             id: 'map2', // Unique identifier for this map instance
             element:  mapRef, // reference to the capacitor-google-map element
-            apiKey: apiKey, // Your Google Maps API Key
+            apiKey: this.apiKey, // Your Google Maps API Key
             config: {
               center: {
                 // The initial position to be rendered by the map
