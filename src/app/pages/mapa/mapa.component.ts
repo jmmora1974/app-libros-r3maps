@@ -24,7 +24,7 @@ export class MapaComponent  implements OnInit {
    }
 
   constructor(private googlemapsService:GooglemapsService) { }
-
+ apiKey = environment.googleApiKey;
   ngOnInit() {
    
   }
@@ -39,7 +39,7 @@ export class MapaComponent  implements OnInit {
     }
 
   async iniciaMapa(){
-           const apiKey = environment.googleApiKey;
+          
       const printCurrentPosition = async () => {
             const coordinates = await Geolocation.getCurrentPosition();
 
