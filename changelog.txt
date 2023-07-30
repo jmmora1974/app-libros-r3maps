@@ -65,6 +65,7 @@ master :
 	-Se incorpora splash e iconos.
 	- Se configura correctamente androidmanifest para incluir la API google.
 	- Se revisan y se arreglan algunos fallos leve.
+	-Se incorpora servicio de mensajeria.
 
 	
 

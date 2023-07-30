@@ -75,6 +75,8 @@ npx cap sync
 ionic generate component pages/mapa
 ionic generate service services/googlemaps
 
+npm install @capacitor/push-notifications
+npx cap sync
 
 ------
 * para android studio
