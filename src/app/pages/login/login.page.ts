@@ -68,7 +68,7 @@ export class LoginPage implements OnInit {
 
       if (user) {
         await this.userService.getUserById(this.authService.getUserId()).then((myUser: IUser) => {
-          console.log('Usuario loginado correctament', myUser.id);
+          console.log('Usuario loginado correctament');
           this.router.navigateByUrl('/home', { replaceUrl: true });
           });
       } else {

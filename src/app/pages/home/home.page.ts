@@ -97,8 +97,13 @@ positionSet: Marker | undefined;
     }
 
   comprarLibro (libro:ILibro){
+    if (!this.authService.getUserId()){
+      this.router.navigateByUrl ('/login',{replaceUrl: true});
+    }else{
+      const res = this.librosService.comprarLibro(libro);
+    }
     
-    const res = this.librosService.comprarLibro(libro);
+   
 
   }
   addMarker (marcador:Marker):void{

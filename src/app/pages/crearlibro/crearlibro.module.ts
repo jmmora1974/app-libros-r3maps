@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CrearlibroPageRoutingModule } from './crearlibro-routing.module';
 
 import { CrearlibroPage } from './crearlibro.page';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { CrearlibroPage } from './crearlibro.page';
     CrearlibroPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [CrearlibroPage]
+  declarations: [CrearlibroPage],
+  providers: [BarcodeScanner]
 })
 export class CrearlibroPageModule {}

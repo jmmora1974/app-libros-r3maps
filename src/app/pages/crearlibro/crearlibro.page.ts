@@ -3,14 +3,16 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LibrosService } from '../../services/libros.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { Auth, UserCredential, User, provideAuth } from '@angular/fire/auth';
+import { User } from '@angular/fire/auth';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { UsuarisService } from '../../services/usuaris.service';
-import { IUser } from 'src/app/models/iuser';
+
 import { ILibro } from '../../models/ilibro';
 import { PhotoService } from 'src/app/services/photo.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-
+import { BarcodeScanResult, BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import { UtilsService } from '../../services/utils.service';
+import { Capacitor } from '@capacitor/core';
 
 
 @Component({
@@ -43,16 +45,21 @@ export class CrearlibroPage implements OnInit {
     private authService: AuthService,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    //private auth:Auth,
+   
     public photoService: PhotoService,
-    
+    private utils: UtilsService,
+    private barcodeScanner: BarcodeScanner 
  
   ) {
     this.user= this.authService.userLogged()!;
     
   }
+
+  isSupported = true;
+
    ngOnInit() {
       this.nuevoForm();
+      this.isSupported =  Capacitor.isPluginAvailable('barcode-scanner');
   }
 
   nuevoForm (){
@@ -179,6 +186,21 @@ export class CrearlibroPage implements OnInit {
     await alert.present();
   }
 
+  scan() {
+    this.barcodeScanner.scan().then(barcodeData => {
+      this.presentAlert(barcodeData);
+     }).catch(err => {
+         console.log('Error', err);
+     });
+  }
 
+  async presentAlert(barcodeData: BarcodeScanResult): Promise<void> {
+    const alert = await this.alertController.create({
+      header: 'Barcode',
+      message: barcodeData.text,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
 
 }

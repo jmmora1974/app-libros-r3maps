@@ -69,9 +69,14 @@
         <ion-col>
           <ion-button type="submit" color="primary" shape="full" expand="block" [disabled]="!formLibro.valid">Create</ion-button>
         </ion-col>
+   
       </ion-row>
-      
+      <ion-button (click)="scan()" shape="full" >
+        Escanea el QR del libro: 
+        <ion-icon name="scan"></ion-icon>
+      </ion-button>
     </form>
   </ion-list>
-  
+
+ 
 </ion-content>
