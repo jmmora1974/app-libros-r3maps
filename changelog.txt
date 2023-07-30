@@ -52,13 +52,20 @@ master :
 	Interfaces:
 		-Se incorporan datos geolocalicación en IUser y ILibro.
 		
-29/07/2030
+29/07/2023
 	Paginas:
 		- Se modifican Signup, perfil, crearlibro, home para agregar/mostrar datos geolocalizacion
 		-Se modifica crearLibro para incorporar QR.
 	Services:
 		-Se modifica googlemaps, libros 
 		- Se crea el servicio utils para la gestión del barcode.
+
+30/07/2023
+	- Se crea rama splash
+	-Se incorpora splash e iconos.
+	- Se configura correctamente androidmanifest para incluir la API google.
+	- Se revisan y se arreglan algunos fallos leve.
+
 	
 
 
