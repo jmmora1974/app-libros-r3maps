@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, Output, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, Platform } from '@ionic/angular';
 
 import { LibrosService } from '../../services/libros.service';
 import { AuthService } from '../../services/auth.service';
@@ -44,6 +44,7 @@ positionSet: Marker | undefined;
     private loadingController: LoadingController,
     private alertController: AlertController,
     private googlemapsService:GooglemapsService,
+    private platform:Platform,
     
   ) {
     
@@ -58,44 +59,48 @@ positionSet: Marker | undefined;
 @Output()  markersPositions= this.librosService.librosMarkers$;
 
 
-  ngOnInit(): void {
-    PushNotifications.requestPermissions().then(result => {
-      if (result.receive === 'granted') {
-        // Register with Apple / Google to receive push via APNS/FCM
-        console.log('Servicio de mensajeria iniciado.');
-        PushNotifications.register();
-      } else {
-        // Show some error
-        console.log('Ha ocurrido un fallo en el servicio de mensajeria');
-      }
-    });
-    // On success, we should be able to receive notifications
-    PushNotifications.addListener('registration',
-      (token: Token) => {
-        alert('Push registration success, token: ' + token.value);
-      }
-    );
+  async ngOnInit() {
 
-    // Some issue with our setup and push will not work
-    PushNotifications.addListener('registrationError',
-      (error: any) => {
-        alert('Error on registration: ' + JSON.stringify(error));
-      }
-    );
+    if (await PushNotifications.checkPermissions()){
+          PushNotifications.requestPermissions().then(result => {
+            if (result.receive === 'granted') {
+              // Register with Apple / Google to receive push via APNS/FCM
+              
+              PushNotifications.register();
+              console.log('Servicio de mensajeria iniciado.');
+            } else {
+              // Show some error
+              console.log('Ha ocurrido un fallo en el servicio de mensajeria');
+            }
+          });
+          // On success, we should be able to receive notifications
+          PushNotifications.addListener('registration',
+            (token: Token) => {
+              alert('Push registration success, token: ' + token.value);
+            }
+          );
 
-    // Show us the notification payload if the app is open on our device
-    PushNotifications.addListener('pushNotificationReceived',
-      (notification: PushNotificationSchema) => {
-        alert('Push received: ' + JSON.stringify(notification));
-      }
-    );
+          // Some issue with our setup and push will not work
+          PushNotifications.addListener('registrationError',
+            (error: any) => {
+              alert('Error on registration: ' + JSON.stringify(error));
+            }
+          );
 
-    // Method called when tapping on a notification
-    PushNotifications.addListener('pushNotificationActionPerformed',
-      (notification: ActionPerformed) => {
-        alert('Push action performed: ' + JSON.stringify(notification));
-      }
-    );
+          // Show us the notification payload if the app is open on our device
+          PushNotifications.addListener('pushNotificationReceived',
+            (notification: PushNotificationSchema) => {
+              alert('Push received: ' + JSON.stringify(notification));
+            }
+          );
+
+          // Method called when tapping on a notification
+          PushNotifications.addListener('pushNotificationActionPerformed',
+            (notification: ActionPerformed) => {
+              alert('Push action performed: ' + JSON.stringify(notification));
+            }
+          );
+        }
     
   }
 
