@@ -60,7 +60,6 @@ positionSet: Marker | undefined;
 
 
   async ngOnInit() {
-
     if (await PushNotifications.checkPermissions()){
           PushNotifications.requestPermissions().then(result => {
             if (result.receive === 'granted') {
