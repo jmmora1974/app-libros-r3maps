@@ -37,7 +37,7 @@ export class MapaComponent  implements OnInit {
     async init() {
       
     }
-
+/*
   async iniciaMapa(){
           
       const printCurrentPosition = async () => {
@@ -67,5 +67,5 @@ export class MapaComponent  implements OnInit {
   addMarcadores(marcadores:ILibro[]){
 
   }
-
+*/
 }
