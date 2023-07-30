@@ -52,5 +52,13 @@ master :
 	Interfaces:
 		-Se incorporan datos geolocalicación en IUser y ILibro.
 		
+29/07/2030
+	Paginas:
+		- Se modifican Signup, perfil, crearlibro, home para agregar/mostrar datos geolocalizacion
+		-Se modifica crearLibro para incorporar QR.
+	Services:
+		-Se modifica googlemaps, libros 
+		- Se crea el servicio utils para la gestión del barcode.
+	
 
 
