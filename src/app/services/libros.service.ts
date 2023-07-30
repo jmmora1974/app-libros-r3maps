@@ -7,6 +7,7 @@ import { User, UserCredential, provideAuth } from '@angular/fire/auth';
 import { getDownloadURL } from '@angular/fire/storage';
 import { PhotoService } from './photo.service';
 import { ToastService } from './toast.service';
+import { Marker } from '@capacitor/google-maps';
 
 
 @Injectable({
@@ -26,6 +27,9 @@ export class LibrosService {
   private librosVendidos=new BehaviorSubject<ILibro[]>([]);
 	librosVendidos$=this.librosVendidos.asObservable();
   
+  private librosMarkers=new BehaviorSubject<Marker[]>([]);
+  librosMarkers$=this.librosMarkers.asObservable();
+  marcardores: Marker[] =[];
 
   constructor(
     private authService: AuthService,
@@ -69,7 +73,7 @@ export class LibrosService {
             }
           }
           if (this.misLibros) { 
-            console.log(this.misLibros)
+           
               this.librospropietari.next(this.misLibros);
             
           }
@@ -95,8 +99,6 @@ export class LibrosService {
     )
   }
   
-  
-
     // Obtiene los libros vendidos directamente de firebase.
     async getLibrobyVendidos(userProp: string) {
       const q = query(collection(this.firestore, 'transacciones'), where('vendedor', '==', userProp));
@@ -115,26 +117,6 @@ export class LibrosService {
     let libros = querySnapshot.docs.map(doc => doc.data() as ILibro);
     return libros;
   }
-
-  // Obtiene los libros comprados.
-  async getLibrobyComprador1(userComp: string) {
-  /*
-      return this.getLibros().subscribe({
-        next: 
-        (data:ILibro[])=> {
-        return data;
-
-        },
-        error: (error) => {
-        // Handle errors
-        console.error(error);
-        return error;
-        }
-      });
-      */
-  }
-
-
 
   // Obtiene la lista de libros
   getLibros() {
@@ -159,21 +141,13 @@ export class LibrosService {
   deleteLibro(libro: ILibro) {
     const libroDocRef = doc(this.firestore, `libros/${libro.id}`);
     deleteDoc(libroDocRef);
-    if (libro.imageUrl) {
-    
+    if (libro.imageUrl) {    
           const restBorrar=this.photoService.deleteImage(libro.imageUrl);
-        
-          console.log (restBorrar)
-        
-        
-    }
-
-
-    
+    } 
   }
   //Gestiona la compra del libro.
   comprarLibro(libro:ILibro){
-    console.log(libro.propietario, this.authService.getUserId() )
+  
     if (libro.propietario==this.authService.getUserId()){
       this.toast.presentToast('Compra no permita','No puedes comprar tus libros','fix','danger', 2000,'danger');
       return 'Compra no permita. No puedes comprar tus libros';
@@ -209,7 +183,7 @@ export class LibrosService {
 
    // Returns a random integer from 0 to 9:
    let unNumero=Math.floor(Math.random() * 5);
-   console.log(unNumero)
+  
    //Generamos un mock para simular compras fallidas. La probabilidad puede cambiar según queremos.
    if (unNumero==3) {
     
@@ -217,5 +191,31 @@ export class LibrosService {
    }else {
     return false;
   }
+  }
+
+  marcadoresLibros(){
+    return this.getLibros().forEach(element => {
+      this.marcardores=[];
+      
+      element. map(
+        
+        (libros:ILibro)=>{
+          
+          if(libros.ubicacion!=null){
+            //this.googlemapsService.addMarker(libros.ubicacion)
+              const marcadorLibro={
+                coordinate: libros.ubicacion,
+                title: libros.titulo,
+                snippet: libros.titulo,
+                iconUrl: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png'
+                
+              } as Marker;
+              this.marcardores.push(marcadorLibro);       
+          }
+        }) 
+        if (this.marcardores) {
+          this.librosMarkers.next(this.marcardores);
+        }
+  });
   }
 }

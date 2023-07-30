@@ -49,13 +49,10 @@ export class CrearlibroPage implements OnInit {
  
   ) {
     this.user= this.authService.userLogged()!;
-    console.log(this.user.uid)
-    //console.log (this.auth.app)
+    
   }
    ngOnInit() {
-    console.log(this.authService.getUserId())
- 
-  this.nuevoForm();
+      this.nuevoForm();
   }
 
   nuevoForm (){
@@ -75,12 +72,7 @@ export class CrearlibroPage implements OnInit {
 
   init() {
     this.user!=this.authService.userLogged();
-   /* this.userService.getUser().then((user: IUser) => {
-      this.userLogat = user;
-      console.log(this.user);
-      console.log(user);
-    });*/
-    this.nuevoLibro.imageUrl= "https://ionicframework.com/docs/img/demos/card-media.png";
+      this.nuevoLibro.imageUrl= "https://ionicframework.com/docs/img/demos/card-media.png";
   }
   addPhotoToGallery() {
     this.photoService.addNewToGallery().then(() => {
@@ -115,12 +107,12 @@ export class CrearlibroPage implements OnInit {
     await loading.present();
    
     if (!this.formLibro.valid) {
-      console.log(this.formLibro.value)
+     
       this.showAlert('Registro fallido', 'Por favor, introduzca todos los datos');
       await loading.dismiss();
       return false;
     } else {
-      console.log(this.formLibro);
+     
       await loading.dismiss();
       this.nuevoLibro={
         titulo: this.formLibro.get('titulo')!.value,
@@ -134,11 +126,11 @@ export class CrearlibroPage implements OnInit {
         ubicacion: (await this.userService.getUser()).ubicacion,
         imageUrl: this.nuevoLibro.imageUrl
       };
-      console.log(this.nuevoLibro)
+      
       return this.librosService
         .createLibro(this.nuevoLibro)
         .then((res) => {
-          console.log(res)
+          
           this.formLibro.reset();
          this.nuevoForm();
           this.router.navigate(['/']);

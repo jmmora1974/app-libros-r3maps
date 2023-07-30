@@ -22,7 +22,7 @@ export class UsuarisService {
     ) { 
       if(authService.getUserId()){
       this.getUser().then ((usu)=>{
-        console.log (usu);
+        
         this.userLogat.next(usu);
         
       })}
@@ -50,7 +50,7 @@ export class UsuarisService {
     const q = query(collection(this.firestore, "users"), where("id", "==", this.authService.getUserId()), limit(1));
     const querySnapshot = await getDocs(q);
     const userDocRef = querySnapshot.docs.map(doc => doc);
-    console.log(userDocRef[0].ref)
+    //console.log(userDocRef[0].ref)
     return updateDoc(userDocRef[0].ref, {
       nom: user.nom,
       cognom: user.cognom,  

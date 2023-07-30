@@ -47,7 +47,7 @@ export class AuthService {
 		
 		if (this.auth.currentUser) {
 			this.loggedIn.next(true);
-			console.log()
+
 			return this.auth.currentUser as User;
 		}
 		else{

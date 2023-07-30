@@ -133,7 +133,9 @@
 
   </ion-form>
   
-  <app-mapa></app-mapa>
+  <app-mapa [markersPositions]="markersPositions">
+   
+  </app-mapa>
  
   <ion-list>
     <ion-list-header>
@@ -193,7 +195,7 @@
     <ion-item color="primary" button detail=false>
       <ion-icon slot="start" color="light" name="log-out"></ion-icon>
       <ion-label color="light">
-        <h3>Sign out</h3>
+        <h3>Eliminar cuenta</h3>
       </ion-label>
     </ion-item>
   </ion-list>

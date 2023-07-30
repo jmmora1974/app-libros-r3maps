@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,14 +10,15 @@ import { LibrosService } from 'src/app/services/libros.service';
 import { PhotoService } from 'src/app/services/photo.service';
 import { UsuarisService } from 'src/app/services/usuaris.service';
 
+import { GoogleMap, Marker } from '@capacitor/google-maps';
+
 import { ModalLibroPage } from './modal-libro/modal-libro.page';
 import { ILibro } from 'src/app/models/ilibro';
-import { GoogleMap } from '@capacitor/google-maps';
-import { environment } from 'src/environments/environment';
-import { Geolocation } from '@capacitor/geolocation';
-import { LatLng } from '@capacitor/google-maps/dist/typings/definitions';
+
+
 import { GooglemapsService } from '../../services/googlemaps.service';
-import {MapaPageModule} from './../mapa/mapa.module'
+
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-perfil',
@@ -25,6 +26,7 @@ import {MapaPageModule} from './../mapa/mapa.module'
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
+  map:any;
   user!: User;
   userLogat!: IUser;
   profile: any;
@@ -34,8 +36,11 @@ export class PerfilPage implements OnInit {
   librosVendidos: ILibro[]=[];
   librosVendidos$=this.librosService.librosVendidos$;
   librosComprados: ILibro[]=[];
-  message='Los cambios del libro son:'
-  
+  message='Los cambios del libro son:';
+  markersPostions: any[]=[];
+  infowindow:any;
+
+ 
 
   constructor( 
     private authService: AuthService,
@@ -52,11 +57,13 @@ export class PerfilPage implements OnInit {
   ) { 
     this.photoService.getUserProfile().subscribe((data) => {
       this.profile = data;
-      this.googlemapsService.iniciaMapa();
+      //this.googlemapsService.iniciaMapa();
     });
    
 
   }
+  @ViewChild('map') divMap: ElementRef | undefined;
+  @Output()  markersPositions:Observable<Marker[]> | undefined;
 
   ngOnInit() {
     this.userService.getUser().then ((usu)=>{
@@ -110,8 +117,7 @@ export class PerfilPage implements OnInit {
     this.user!=this.authService.userLogged();
     await this.userService.getUser().then((user: IUser) => {
       this.userLogat = user;
-      console.log(this.user);
-      console.log(user);
+      
       this.formperfil =  this.fb.group ({
         tokenPush: [this.userLogat!.tokenPush],
         email: [this.userLogat.email, [Validators.required,Validators.email]],
@@ -154,7 +160,7 @@ export class PerfilPage implements OnInit {
       imageUrl:this.formperfil.get('imageUrl')?.value,
       tokenPush:this.formperfil.get('tokenPush')?.value,
     }
-    console.log('Usep :',userP)
+    
  
     
   }
@@ -174,7 +180,7 @@ export class PerfilPage implements OnInit {
   }
   //Borra el libro
   deleteLibro(libro:any){
-    console.log (libro)
+   
       this.librosService.deleteLibro(libro);
   }
   
@@ -252,7 +258,35 @@ export class PerfilPage implements OnInit {
       this.router.navigateByUrl ('/',{replaceUrl: true});
     
   }
+  addMarker (marcador:Marker):void{
+    //let latLng = new google.maps.LatLng(position.lat, position.lng)
+    //console.log ('admk',latLng)
+    this.infowindow=new google.maps.InfoWindow();
+    const marker=new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      draggable: false,
+    });
+    marker.setPosition (marcador.coordinate);
+    this.setInfowindow (marker, marcador.title!,marcador.snippet!)
+    //this.map.panTo(latLng);
+    //this.positionSet = marcador;
+}
 
- 
+setInfowindow(marker: any, titulo: string, subtitulo: string){
+const contentString = '<div id="contentInsideMap">'+
+                    '<div>'+
+                    '</div>'+
+                    '<p style=fint-weight: bold; margin-bottom: 5px;">'+
+                    '<div id="bodyContent">'+
+                    '<p class="normal m-0">'+
+                    subtitulo+'</p>'+
+                    '</div>'+
+                    '</div>';
+this.infowindow.setContent (contentString);
+this.infowindow.open (this.map, marker);
+
+}
+
 
 }

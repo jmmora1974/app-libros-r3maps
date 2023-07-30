@@ -62,7 +62,7 @@ userLogat$=this.usuarisService.userLogat$;
     const response = await fetch(photo.webPath!);
     const blob = await response.blob();
     const res = await uploadBytesResumable(storageRef, blob); 
-    console.log(res);
+  
     const storageUri = await getDownloadURL(storageRef);
     this.user.avatar! = {
       storagePath: storageUri,
@@ -128,7 +128,7 @@ userLogat$=this.usuarisService.userLogat$;
       const q = query(collection(this.firestore, "users"), where("id", "==", this.authService.getUserId()), limit(1));
       const querySnapshot = await getDocs(q);
       const userDocRef1 = querySnapshot.docs.map(doc => doc);
-      console.log(userDocRef1[0].ref)
+      //console.log(userDocRef1[0].ref)
 
       const userDocRef = doc(this.firestore, `users/${this.user!.id}`);
       await updateDoc(userDocRef1[0].ref, {
@@ -172,7 +172,7 @@ userLogat$=this.usuarisService.userLogat$;
         
       
       const desertRef = ref(this.storage, urlImage);
-      console.log (desertRef)
+   
     if(desertRef){
       // Delete the file
       deleteObject(desertRef).then(() => {

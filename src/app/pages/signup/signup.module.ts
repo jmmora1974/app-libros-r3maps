@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SignupPageRoutingModule } from './signup-routing.module';
 
 import { SignupPage } from './signup.page';
+import { MapaPageModule } from '../mapa/mapa.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { SignupPage } from './signup.page';
     FormsModule,
     IonicModule,
     SignupPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MapaPageModule
   ],
   declarations: [SignupPage],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

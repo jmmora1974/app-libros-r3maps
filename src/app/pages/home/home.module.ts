@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -15,8 +15,10 @@ import { MapaPageModule } from '../mapa/mapa.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    MapaPageModule
+    MapaPageModule,
+    ReactiveFormsModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
 })
 export class HomePageModule {}

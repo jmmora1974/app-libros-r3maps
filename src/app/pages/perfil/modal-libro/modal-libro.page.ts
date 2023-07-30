@@ -82,7 +82,7 @@ export class ModalLibroPage {
       } else {
         this.nuevoLibro.imageUrl=result;
         this.formLibro.get('imageUrl')?.setValue(result);
-        console.log (this.formLibro)
+       
       }
     }
    

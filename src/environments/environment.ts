@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  googleApiKey: "AIzaSyBZDTQ4N0oN9lzp4A73V6cMj8qTU0Wzhjs",
   firebase: {
     projectId: 'app-libros-986e7',
     appId: '1:71001102642:web:8c34aa3919c0284cabdf2b',
@@ -14,7 +15,7 @@ export const environment = {
     messagingSenderId: '71001102642',
   },
   production: false,
-  googleApiKey: "AIzaSyBZDTQ4N0oN9lzp4A73V6cMj8qTU0Wzhjs",
+  
   
 };
 

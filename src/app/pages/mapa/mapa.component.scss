@@ -1,5 +1,28 @@
 capacitor-google-map {
     display: inline-block;
     width: 98%;
-    height: 250px;
+    height: 300px;
   }
+
+  .miubicacion{
+    position: fixed;
+    
+    background: yellow;
+    background-color: #8090eb;
+    top: 55px;
+    right: 10px;
+}
+
+.aceptar{
+    position: fixed;
+    top: 55px;
+    right: 5px;
+    background-color: #8090eb;
+}
+
+.search {
+    position: relative;
+    top: 45px;
+    left: 0px;
+    background-color: #8090eb;
+}
