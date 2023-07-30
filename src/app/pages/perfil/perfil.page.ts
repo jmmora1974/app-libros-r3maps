@@ -10,13 +10,12 @@ import { LibrosService } from 'src/app/services/libros.service';
 import { PhotoService } from 'src/app/services/photo.service';
 import { UsuarisService } from 'src/app/services/usuaris.service';
 
-import { GoogleMap, Marker } from '@capacitor/google-maps';
+import { Marker } from '@capacitor/google-maps';
 
 import { ModalLibroPage } from './modal-libro/modal-libro.page';
 import { ILibro } from 'src/app/models/ilibro';
 
 
-import { GooglemapsService } from '../../services/googlemaps.service';
 
 import { Observable } from 'rxjs';
 
@@ -53,11 +52,11 @@ export class PerfilPage implements OnInit {
     public librosService:LibrosService,
     private fb: FormBuilder,
     private modalCtrl: ModalController,
-    private googlemapsService:GooglemapsService
+   
   ) { 
     this.photoService.getUserProfile().subscribe((data) => {
       this.profile = data;
-      //this.googlemapsService.iniciaMapa();
+      
     });
    
 
@@ -178,6 +177,7 @@ export class PerfilPage implements OnInit {
       this.librosService.updateLibro(data)
     }
   }
+
   //Borra el libro
   deleteLibro(libro:any){
    
@@ -224,8 +224,9 @@ export class PerfilPage implements OnInit {
       });
       await alert.present();
     } 
-    //Cambia la foto avatar
-    
+
+
+    //Cambia la foto avatar    
   async changeImage() {
       const image = await Camera.getPhoto({
         quality: 60,
@@ -240,7 +241,7 @@ export class PerfilPage implements OnInit {
   
         const result = await this.photoService.uploadImage(image);
         loading.dismiss();
-  
+        console.log(result);
         if (!result) {
           const alert = await this.alertController.create({
             header: 'Upload failed',

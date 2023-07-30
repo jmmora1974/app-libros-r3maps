@@ -65,7 +65,7 @@ ngOnInit() {
       this.markersPositions.forEach((elemen)=>{
       
         elemen.map((libroMarcador)=>{
-            if (libroMarcador){
+            if (libroMarcador.coordinate){
                this.addMarker(libroMarcador);
              }
         })
@@ -96,9 +96,10 @@ await this.googlemapsService.init(this.renderer,this.document).then(()=>{
 async initMap (){
 
       let mapOptions = {
-          center: {lat: 41.3849685, 
-            lng: 2.1609364}
-          ,
+          center: {
+            lat: 41.3849685, 
+            lng: 2.1609364
+          },
           zoom: 6,
           disableDefaultUI: true,
           clickableIcons: false,      

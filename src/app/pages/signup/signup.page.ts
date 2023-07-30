@@ -91,7 +91,10 @@ async signUp(){
       const user = await this.authService.register(this.credentials.value);
 
       if (user) {
-
+        const posicion:LatLng={
+            lat: this.miUbicacion.coordinate.lat,
+            lng: this.miUbicacion.coordinate.lat
+          }
         const myUser: IUser = {
           id: this.authService.getUserId(),
           displayname: this.credentials.get('displayname')?.value,
@@ -105,7 +108,7 @@ async signUp(){
           puerta:this.credentials.get('puerta')?.value,
           ciudad:this.credentials.get('ciudad')?.value,
           pais:this.credentials.get('pais')?.value,
-          ubicacion: this.miUbicacion.coordinate,
+          ubicacion: posicion,
           phone:this.credentials.get('phone')?.value,
           tokenPush: '',
           avatar: {

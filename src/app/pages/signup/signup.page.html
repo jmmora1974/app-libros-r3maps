@@ -123,12 +123,12 @@
         </ion-label>
         <ion-input color="secondary" type="text" autocomplete="off" formControlName="pais" placeholder="Pais"></ion-input>
       </ion-item>  
-      <app-mapa [markersPositions]="markersPositions"></app-mapa>
+    
       <ion-button class="ion-margin-top" type="submit" expand="block" size="large" color="secondary">
         Sign up free
       </ion-button>
     </form>
-  
+    <app-mapa [markersPositions]="markersPositions"></app-mapa>
     <div class="ion-text-center ion-margin-top">
       <ion-text color="medium">
         <small>&copy;{{current_year}} Firmino.dev</small>

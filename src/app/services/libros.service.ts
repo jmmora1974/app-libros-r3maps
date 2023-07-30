@@ -197,8 +197,7 @@ export class LibrosService {
     return this.getLibros().forEach(element => {
       this.marcardores=[];
       
-      element. map(
-        
+      element. map(      
         (libros:ILibro)=>{
           
           if(libros.ubicacion!=null){

@@ -51,23 +51,6 @@ positionSet: Marker | undefined;
 }
 @ViewChild('app-mapa') divMap!: ElementRef ;
 @Output()  markersPositions= this.librosService.librosMarkers$;
-/*  markersPositions:Marker[]=[
-  {
-    coordinate: {lat: 41.3849685,  lng: 2.1809364},
-    title: 'pp1', 
-    snippet: 'sub1',
-    iconUrl:'https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png'
-  },
-  ,{
-    coordinate:{lat: 41.2385,  lng: 2.1609364},  title: 'pp2', snippet: 'sub2',
-    iconUrl:'https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png'
-  },{
-    coordinate:{lat:  41.3949685,  lng: 0.1909364}, title: 'pp3', snippet: 'sub3',
-    iconUrl:'https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png'
-  },{
-    coordinate:{lat:  41.3949685,  lng: 0.1909364}, title: 'pp4', snippet: 'sub4',
-    iconUrl:'https://developers.google.com/maps/documentation/javascript/examples/full/images/library_maps.png'
-  }] as Marker[];*/
 
 
   ngOnInit(): void {
@@ -75,22 +58,7 @@ positionSet: Marker | undefined;
   }
 
   async ionViewDidEnter() {
-     
-    let mapOptions = {
-      center: {lat:41.2,lng:2.3},
-      zoom: 7,
-      disableDefaultUI: true,
-      clickableIcons: false,      
-  }
-
- /* this.map = await new google.maps.Map (this.divMap!.nativeElement, mapOptions);
-    */
-    setTimeout(()=>{
-
-     // this.googlemapsService.iniciaMapa();
-    },5000)
-   
-    };
+    }
 
     async init() {
       

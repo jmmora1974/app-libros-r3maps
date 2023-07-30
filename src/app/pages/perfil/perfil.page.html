@@ -129,7 +129,7 @@
     </ion-item>
 
     <ion-button expand="full" type="button" [disabled]="!formperfil.dirty" (click)="actualizaPerfil()">Actualizar perfil</ion-button>
-    <ion-button expand="full" type="button" (click)="returnHome()">Volver a homer</ion-button>
+    <ion-button expand="full" type="button" (click)="returnHome()">Volver a home</ion-button>
 
   </ion-form>
   
@@ -152,7 +152,7 @@
       
         <ion-card-content>
           {{libro.valoracion}} - {{libro.descripcion}}
-          <p>Precio: {{libro.precio}}<ion-icon name="coin"></ion-icon> </p>
+          <p>Precio: {{libro.precio|currency}}</p>
           <ion-button (click)="openModal(libro)"><ion-icon name="create-outline"></ion-icon></ion-button>
           <ion-button (click)='deleteLibro(libro)'><ion-icon name="trash-outline"></ion-icon></ion-button>
         </ion-card-content>
@@ -171,21 +171,21 @@
     </ion-card-header>
     <ion-card-content>
       {{libroVend.valoracion}} - {{libroVend.descripcion}}
-      <p>Precio: {{libroVend.precio}}<ion-icon name="coin"></ion-icon> </p>
+      <p>Precio: {{libroVend.precio|currency}} </p>
       
     </ion-card-content>
   </ion-card>
 
   <ion-title> Listado de libros comprados</ion-title>
 
-<ion-card *ngFor="let libroComp of librosComprados">
+<ion-card  *ngFor="let libroComp of librosComprados" >
   <ion-card-header>
       <ion-card-title >{{libroComp.titulo}}</ion-card-title>
       <ion-card-subtitle>{{libroComp.categoria}}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
     {{libroComp.valoracion}} - {{libroComp.descripcion}}
-    <p>Precio: {{libroComp.precio}}<ion-icon name="coin"></ion-icon> </p>
+    <p>Precio: {{libroComp.precio|currency}}</p>
     
   </ion-card-content>
 </ion-card>
